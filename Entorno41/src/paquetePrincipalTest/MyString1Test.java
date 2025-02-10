@@ -37,8 +37,7 @@ class MyString1Test {
         assertTrue(MyString1.esPalindroma("reconocer"));
         assertFalse(MyString1.esPalindroma("java"));
         assertTrue(MyString1.esPalindroma("Anita lava la tina"));
-        //Vamos a decidr que no pueda funcionar con numeros, pues no son palabras ni letras, por tanto, moviendo la primera linea tras el if al principio se arregla
-        assertFalse(MyString1.esPalindroma("123454321"));
+        assertTrue(MyString1.esPalindroma("123454321"));
         assertFalse(MyString1.esPalindroma("45"));
     }
 
@@ -47,6 +46,8 @@ class MyString1Test {
         Map<String, Integer> esperado = new HashMap<>(Map.of("hola", 2, "mundo", 3));
         assertEquals(esperado, MyString1.contarFrecuenciaPalabras("Hola hola mundo mundo mundo"));
         esperado.clear();
+        esperado = new HashMap<>(Map.of("hola", 2, "mundo", 3));
+        assertEquals(esperado, MyString1.contarFrecuenciaPalabras("  Hola hola  mundo   mundo mundo "));
         
       }
 
@@ -66,7 +67,7 @@ class MyString1Test {
         esperado4.put('y', 1);
         esperado4.put('o', 1);
         esperado4.put('l', 1);
-        assertEquals(esperado4, MyString1.contarFrecuenciaLetras("si hay sol"));
+        assertEquals(esperado4, MyString1.contarFrecuenciaLetras(" si hay  sol"));
     }
 
 }

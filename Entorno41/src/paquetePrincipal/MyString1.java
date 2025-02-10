@@ -6,11 +6,12 @@ import java.util.Map;
 public class MyString1 {
 
 // Método para contar el número de palabras en una cadena
+//Se añade .trim() para solucionar problemas con los espacion vacios
 public static int contarPalabras(String str) {
-	if (str == null || str.isEmpty()) {
+	if (str == null || str.trim().isEmpty()) {
 		return 0;
 	}
-	String[] palabras = str.split("\\s+");
+	String[] palabras = str.trim().split("\\s+");
 	return palabras.length;
 }
 
@@ -24,12 +25,14 @@ public static int contarLetrasDiferentes(String str) {
 }
 
 // Método para contar las veces que aparece cada palabra en una cadena
+//Con la linea 33 eliminamos cualquier cosa que no sea 1 espacio o letras, para que el split haga mejor su funcion
 public static Map<String, Integer> contarFrecuenciaPalabras(String str) {
 	Map<String, Integer> frecuenciaPalabras = new HashMap<>();
-	if (str == null || str.isEmpty()) {
+	if (str == null || str.trim().isEmpty()) {
 		return frecuenciaPalabras;
 	}
-	String[] palabras = str.toLowerCase().split("\\s+");
+	str = str.toLowerCase().replaceAll("[^a-z\\s]", "");
+	String[] palabras = str.trim().split("\\s+");
 	for (String palabra : palabras) {
 		frecuenciaPalabras.put(palabra, frecuenciaPalabras.getOrDefault(palabra, 0) + 1);
 	}
@@ -50,11 +53,12 @@ public static Map<Character, Integer> contarFrecuenciaLetras(String str) {
 }
 
 // Método para verificar si una palabra es palíndroma
+//Añadiendo el 0-9 verificamos numeros también y con el .trim() comprobamos cadenas de espacios
 public static boolean esPalindroma(String palabra) {
-	palabra = palabra.toLowerCase().replaceAll("[^a-z]", "");
-	if (palabra == null || palabra.isEmpty()) {
+	if (palabra == null || palabra.trim().isEmpty()) {
 		return false;
 	}
+	palabra = palabra.toLowerCase().replaceAll("[^a-z0-9]", "");
 	int izquierda = 0;
 	int derecha = palabra.length() - 1;
 	while (izquierda < derecha) {
