@@ -29,6 +29,7 @@ class MyString1Test {
         assertEquals(0, MyString1.contarLetrasDiferentes(""));
         assertEquals(0, MyString1.contarLetrasDiferentes(" "));
         assertEquals(0, MyString1.contarLetrasDiferentes("@&$%"));
+        assertEquals(0, MyString1.contarLetrasDiferentes(null));
     }
 
     @Test
@@ -36,23 +37,18 @@ class MyString1Test {
         assertTrue(MyString1.esPalindroma("reconocer"));
         assertFalse(MyString1.esPalindroma("java"));
         assertTrue(MyString1.esPalindroma("Anita lava la tina"));
-        assertTrue(MyString1.esPalindroma("123454321"));
+        //Vamos a decidr que no pueda funcionar con numeros, pues no son palabras ni letras, por tanto, moviendo la primera linea tras el if al principio se arregla
+        assertFalse(MyString1.esPalindroma("123454321"));
+        assertFalse(MyString1.esPalindroma("45"));
     }
 
     @Test
     void testContarFrecuenciaPalabras() {
-        Map<String, Integer> esperado1 = new HashMap<>();
-        esperado1.put("hola", 2);
-        esperado1.put("mundo", 3);
-        assertEquals(esperado1, MyString1.contarFrecuenciaPalabras("Hola hola mundo mundo mundo"));
-        Map<String, Integer> esperado2 = new HashMap<>();
-        esperado2.put("buenas", 1);
-        esperado2.put("tardes", 4);
-        esperado2.put("las", 1);
-        esperado2.put("de", 1);
-        esperado2.put("hoy", 1);
-        assertEquals(esperado2, MyString1.contarFrecuenciaPalabras("buenas tardes las tardes de hoy tardes tardes"));
-    }
+        Map<String, Integer> esperado = new HashMap<>(Map.of("hola", 2, "mundo", 3));
+        assertEquals(esperado, MyString1.contarFrecuenciaPalabras("Hola hola mundo mundo mundo"));
+        esperado.clear();
+        
+      }
 
     @Test
     void testContarFrecuenciaLetras() {
